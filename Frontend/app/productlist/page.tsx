@@ -1,6 +1,7 @@
 // app/productlist/page.tsx
 
 "use client";
+import Navbar from "../components/Navbar";
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -73,6 +74,9 @@ function ProductListContent() {
   };
 
   return (
+    <div className="home">
+      <Navbar/>
+      
     <div className="productContainer">
       <h1 className="heading">
         {category ? `${category} Products` : search ? `Search Results for "${search}"` : "All Products"}
@@ -174,6 +178,15 @@ function ProductListContent() {
         </table>
       )}
     </div>
+    </div>
+  );
+}
+
+export default function ProductListPage() {
+  return (
+    <Suspense fallback={<div style={{ textAlign: "center", padding: "50px" }}>Loading page content...</div>}>
+      <ProductListContent />
+    </Suspense>
   );
 }
 
